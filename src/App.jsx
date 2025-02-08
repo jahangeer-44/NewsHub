@@ -6,6 +6,7 @@ import Entertainment from "./components/Entertainment";
 import Sports from "./components/Sports";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home"; 
+import SearchHandler from "./components/SearchHandler";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,15 @@ const router = createBrowserRouter([
       <div>
         <Nav />
         <Politics />
+      </div>
+    ),
+  },
+  {
+    path: "/searchhandler",  
+    element: (
+      <div>
+        <Nav />
+        <SearchHandler />
       </div>
     ),
   },

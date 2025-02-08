@@ -31,7 +31,7 @@ const Technology = () => {
         {newsData.map((curItem, index) => (
           <div
             key={index}
-            className="w-80 bg-white shadow-md border border-gray-200 rounded-md mt-5"
+            className="w-80 bg-blue-100 shadow-md border border-gray-200 rounded-md mt-5"
           >
             <img
               src={curItem.urlToImage}

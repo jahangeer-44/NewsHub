@@ -1,48 +1,18 @@
-import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import Card from "./Card";
-const API_KEY = "a605bc8a0d0b493190e82b9e4a3a60ed";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [newsData, setNewsData] = useState([]);
-  const location = useLocation(); 
-
-  const getCategory = () => {
-    const path = location.pathname.replace("/", "").toLowerCase();
-    return path || "general";
-  };
-
-  useEffect(() => { 
-    const fetchCategoryNews = async () => {
-      const category = getCategory();
-      try {
-        const response = await fetch(
-          `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=${API_KEY}`
-        );
-        const jsonData = await response.json();
-        setNewsData(jsonData.articles);
-      } catch (error) {
-        console.error("Error fetching category news:", error);
-      }
-    };
-    fetchCategoryNews();
-  }, [location.pathname]);
-
-  const getData = async (event) => {
+  const navigate = useNavigate(); 
+   
+  const getData = (event) => {
     event.preventDefault();
     if (!searchQuery.trim()) return;
-    try {
-      const response = await fetch(
-        `https://newsapi.org/v2/everything?q=${searchQuery}&apiKey=${API_KEY}`
-      );
-      const jsonData = await response.json();
-      setNewsData(jsonData.articles);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
+    
+    // Navigate to search page with query as state
+    navigate("/searchhandler", { state: { query: searchQuery } });
   };
 
   return (
@@ -63,12 +33,11 @@ const Nav = () => {
             type="text"
             placeholder="Search news..."
             className="bg-white text-black px-3 py-1 rounded-l-md w-full"
-            value={searchQuery} 
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button
             type="submit"
-            onSubmit={() => alert("dkljfds ")}
             className="bg-red-400 px-3 py-1 text-white rounded-r-md hover:bg-red-600 transition"
           >
             Search
@@ -95,21 +64,14 @@ const Nav = () => {
               />
               <button
                 type="submit"
-                onSubmit={() => alert("dkljfds ")}
                 className="bg-red-400 px-3 py-1 text-white rounded-r-md hover:bg-red-600 transition w-full mt-2"
               >
-                Search 
+                Search
               </button>
             </form>
           </div>
         )}
       </div>
-
-      <div>
-        
-        <Card data={newsData} />
-      </div>
- 
     </>
   );
 };
