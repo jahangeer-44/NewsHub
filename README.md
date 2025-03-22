@@ -1,3 +1,3 @@
-https://news-hub-orpin.vercel.app/
+https://news-hub-teal.vercel.app/
 
 Output images are in Assets Folder
