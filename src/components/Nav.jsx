@@ -7,7 +7,7 @@ const Nav = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate(); 
    
-  const getData = (event) => {
+  const getData = (event) => { 
     event.preventDefault();
     if (!searchQuery.trim()) return;
     
